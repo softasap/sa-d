@@ -1,0 +1,4 @@
+[submodule "roles/sa-d"]
+        path = roles/sa-d
+        url = https://github.com/softasap/sa-d.git
+
