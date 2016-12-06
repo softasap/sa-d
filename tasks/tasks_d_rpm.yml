@@ -19,7 +19,7 @@
     -dmd
 
 - name: DMD | install package
-  yum: deb="/tmp/dmd.deb" state="present"
+  yum: deb="/tmp/dmd.rpm" state="present"
   become: true
   when: dmd_check_deb.rc == 1
   tags:
