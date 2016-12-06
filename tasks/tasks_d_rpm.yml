@@ -1,0 +1,27 @@
+---
+# tasks file for sa-d
+
+- name: DMD | Check if my_package is installed
+  command: rpm -q dmd-bin
+  register: dmd_check_deb
+  become: yes
+  failed_when: dmd_check_deb.rc > 1
+  changed_when: dmd_check_deb.rc == 1
+  tags:
+    -dmd
+
+- name: DMD | download package
+  get_url:
+    url="http://downloads.dlang.org/releases/2.x/{{dmd_version}}/dmd-{{dmd_version}}-0.fedora.x86_64.rpm"
+    dest="/tmp/dmd.rpm"
+  when: dmd_check_deb.rc == 1
+  tags:
+    -dmd
+
+- name: DMD | install package
+  yum: deb="/tmp/dmd.deb" state="present"
+  become: true
+  when: dmd_check_deb.rc == 1
+  tags:
+    -dmd
+

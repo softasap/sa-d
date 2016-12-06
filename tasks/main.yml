@@ -1,0 +1,9 @@
+---
+# tasks file for sa-d
+
+  - include: tasks_d.yml
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  - include: tasks_d_rpm.yml
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
